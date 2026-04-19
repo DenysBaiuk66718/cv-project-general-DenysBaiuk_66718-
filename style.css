@@ -67,3 +67,40 @@ body.red-theme a { color: #e74c3c; }
     width: 30% ; 
     height: auto;
 }
+/*zadanie 5(stylizowanie formularza*/
+#contactSection {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 2px solid #ccc;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input, 
+.form-group textarea {
+    width: 100%;
+    max-width: 400px;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.85em;
+    display: block;
+    min-height: 1.2em;
+    margin-top: 3px;
+}
+
+.input-error {
+    border: 2px solid red;
+    background-color: #ffe6e6;
+}
