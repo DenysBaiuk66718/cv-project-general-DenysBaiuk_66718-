@@ -62,3 +62,8 @@ body.red-theme h3 {
   background: transparent; 
 }
 body.red-theme a { color: #e74c3c; }
+
+.profile-photo {
+    width: 30% ; 
+    height: auto;
+}
