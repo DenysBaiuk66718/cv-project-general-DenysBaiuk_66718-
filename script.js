@@ -121,3 +121,55 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("Błąd pobierania danych:", error);
     });
 });
+// ==========================================
+// ZADANIE 7: Local Storage (Lista celów)
+// ==========================================
+const goalInput = document.getElementById("goalInput");
+const addGoalBtn = document.getElementById("addGoalBtn");
+const goalsList = document.getElementById("goalsList");
+
+if (goalInput && addGoalBtn && goalsList) {
+  const renderGoals = () => {
+    goalsList.innerHTML = "";
+    const goals = JSON.parse(localStorage.getItem("myGoals")) || [];
+
+    goals.forEach((goal, index) => {
+      const li = document.createElement("li");
+      li.style.display = "flex";
+      li.style.justifyContent = "space-between";
+      li.style.marginBottom = "8px";
+      li.style.padding = "8px";
+      li.style.backgroundColor = "#f4f4f4";
+      li.style.border = "1px solid #ccc";
+
+      li.innerHTML = `
+                    <span>${goal}</span>
+                    <button data-index="${index}" style="background: #ff4c4c; color: white; border: none; padding: 5px 10px; cursor: pointer;">Usuń</button>
+                `;
+      goalsList.appendChild(li);
+    });
+  };
+
+  addGoalBtn.addEventListener("click", () => {
+    const newGoal = goalInput.value.trim();
+    if (newGoal !== "") {
+      const goals = JSON.parse(localStorage.getItem("myGoals")) || [];
+      goals.push(newGoal);
+      localStorage.setItem("myGoals", JSON.stringify(goals));
+      goalInput.value = "";
+      renderGoals();
+    }
+  });
+
+  goalsList.addEventListener("click", (e) => {
+    if (e.target.tagName === "BUTTON") {
+      const index = e.target.getAttribute("data-index");
+      const goals = JSON.parse(localStorage.getItem("myGoals")) || [];
+      goals.splice(index, 1);
+      localStorage.setItem("myGoals", JSON.stringify(goals));
+      renderGoals();
+    }
+  });
+
+  renderGoals();
+}

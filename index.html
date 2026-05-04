@@ -13,6 +13,34 @@
       <button id="sectionToggle">Ukryj/Pokaż Umiejętności</button>
     </div>
     <section id="contactSection">
+      <!--ZADANIE 7: Local Storage -->
+      <section id="goalsSection">
+        <h2>Moje Cele / Notatki</h2>
+        <div
+          class="form-group"
+          style="display: flex; gap: 10px; max-width: 400px"
+        >
+          <input
+            type="text"
+            id="goalInput"
+            placeholder="Wpisz nowy cel..."
+            style="flex-grow: 1; padding: 8px"
+          />
+          <button id="addGoalBtn" style="padding: 8px 15px; cursor: pointer">
+            Dodaj
+          </button>
+        </div>
+
+        <ul
+          id="goalsList"
+          style="
+            list-style-type: none;
+            padding: 0;
+            max-width: 400px;
+            margin-top: 15px;
+          "
+        ></ul>
+      </section>
       <h2>Kontakt</h2>
       <form id="contactForm">
         <div class="form-group">
