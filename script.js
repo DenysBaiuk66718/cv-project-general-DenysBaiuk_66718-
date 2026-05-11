@@ -4,8 +4,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // ==========================================
   // ZADANIE 4: Interakcja
   // ==========================================
-  const themeBtn = document.getElementById("themeToggle"); // Upewnij się, że masz takie ID przycisku w HTML
-  const sectionBtn = document.getElementById("sectionToggle"); // Upewnij się, że masz takie ID w HTML
+  const themeBtn = document.getElementById("themeToggle");
+  const sectionBtn = document.getElementById("sectionToggle");
   const skillsSection = document.getElementById("skills-section");
   const body = document.body;
 
@@ -74,9 +74,37 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!message.value.trim())
         showError(message, "Wiadomość nie może być pusta");
 
+      //Zadanie 8 Backend 66718 Denys Baiuk
       if (isValid) {
-        document.getElementById("successMessage").style.display = "block";
-        contactForm.reset();
+        const formData = {
+          firstName: firstName.value.trim(),
+          lastName: lastName.value.trim(),
+          email: email.value.trim(),
+          message: message.value.trim(),
+        };
+
+        const backendURL =
+          "https://6a019f8436fb6ad04de1507d.mockapi.io/messages";
+
+        fetch(backendURL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        })
+          .then((response) => {
+            if (response.ok) {
+              document.getElementById("successMessage").style.display = "block";
+              contactForm.reset();
+            } else {
+              alert("Błąd serwera. Spróbuj ponownie.");
+            }
+          })
+          .catch((error) => {
+            console.error("Błąd połączenia:", error);
+            alert("Nie udało się połączyć z serwerem.");
+          });
       }
     });
   }
@@ -92,7 +120,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return response.json();
     })
     .then((data) => {
-      // Generowanie listy umiejętności
       const skillsList = document.getElementById("skillsList");
       if (skillsList) {
         data.skills.forEach((skill) => {
@@ -102,7 +129,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
 
-      // Generowanie listy projektów
       const projectsList = document.getElementById("projectsList");
       if (projectsList) {
         data.projects.forEach((project) => {
